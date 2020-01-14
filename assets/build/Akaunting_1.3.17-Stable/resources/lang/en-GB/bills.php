@@ -10,6 +10,7 @@ return [
     'cheque_number'         => 'Cheque Number',
     'ic'                    => 'IC',
     'customer_id'           => 'customer_id',
+    'phone'                 => 'Phone',
     'bill_from'             => 'Bill From',
 
     'quantity'              => 'Quantity',
