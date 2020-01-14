@@ -74,7 +74,7 @@ class AdminMenu
             if ($user->can(['read-expenses-bills', 'read-expenses-payments', 'read-expenses-vendors'])) {
                 $menu->dropdown(trans_choice('general.expenses', 2), function ($sub) use($user, $attr) {
                     if ($user->can('read-expenses-bills')) {
-                        $sub->url('expenses/bills', trans_choice('general.bills', 2), 1, $attr);
+                        $sub->url('expenses/bills?search=&bill_date=&limit=10', trans_choice('general.bills', 2), 1, $attr);
                     }
 
                     if ($user->can('read-expenses-payments')) {
