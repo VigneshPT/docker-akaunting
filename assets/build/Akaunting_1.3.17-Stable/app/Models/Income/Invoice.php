@@ -50,6 +50,7 @@ class Invoice extends Model
     protected $searchableColumns = [
         'invoice_number'   => 10,
         'order_number'     => 10,
+        'phone'            => 10,
         'customer_name'    => 10,
         'customer_email'   => 5,
         'customer_phone'   => 2,

@@ -3,9 +3,9 @@
 
     <body onload="window.print();">
         @stack('body_start')
-
-        @yield('content')
-
+        <div class="text-center" style="margin-left: 0; page-break-after: always;">
+            @yield('content')
+        </div>
         @stack('body_end')
     </body>
 </html>

@@ -4,13 +4,13 @@
 
 @section('content')
 <div class="row header">
-    <div class="col-58">
+    <div class="col-1">
         @if ($logo)
         <img src="{{ $logo }}" class="logo" />
         @endif
     </div>
-    <div class="col-42">
-        <div class="text company">
+    <div class="col-1">
+        <div class="text">
             <strong>{{ setting('general.company_name') }}</strong><br>
             {!! nl2br(setting('general.company_address')) !!}<br>
             @if (setting('general.company_tax_number'))
@@ -26,7 +26,7 @@
 </div>
 
 <div class="row">
-    <div class="col-58">
+    <div class="col-1">
         <div class="text">
             {{ trans('invoices.bill_to') }}<br><br>
             @stack('name_input_start')
@@ -51,7 +51,7 @@
             @stack('email_input_end')
         </div>
     </div>
-    <div class="col-42">
+    <div class="col-1">
         <div class="text">
             <table>
                 <tbody>
@@ -87,7 +87,7 @@
     </div>
 </div>
 
-<table class="lines">
+<table class="table small-table">
     <thead>
         <tr>
             @stack('actions_th_start')
@@ -138,7 +138,7 @@
 </table>
 
 <div class="row">
-    <div class="col-58">
+    <div class="col-1">
         @stack('notes_input_start')
         @if ($invoice->notes)
         <table class="text" style="page-break-inside: avoid;">
@@ -148,7 +148,7 @@
         @endif
         @stack('notes_input_end')
     </div>
-    <div class="col-42">
+    <div class="col-1">
         <table class="text" style="page-break-inside: avoid;">
             <tbody>
             @foreach ($invoice->totals as $total)

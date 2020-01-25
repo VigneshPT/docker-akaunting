@@ -49,6 +49,7 @@ class Bill extends Model
     protected $searchableColumns = [
         'bill_number'    => 10,
         'order_number'   => 10,
+        'phone'          => 10,
         'vendor_name'    => 10,
         'vendor_email'   => 5,
         'vendor_phone'   => 2,

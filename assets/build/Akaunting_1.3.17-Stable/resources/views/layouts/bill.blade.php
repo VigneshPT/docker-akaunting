@@ -5,7 +5,7 @@
         @stack('body_start')
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="wrapper" style="margin-left: 0; page-break-after: always;">
+        <div class="text-center" style="margin-left: 0; page-break-after: always;">
             @yield('content')
         </div>
         <!-- /.content-wrapper -->

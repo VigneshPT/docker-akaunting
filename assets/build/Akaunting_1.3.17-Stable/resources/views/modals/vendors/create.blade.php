@@ -13,6 +13,8 @@
 
                     {{ Form::textGroup('email', trans('general.email'), 'envelope', []) }}
 
+                    {{ Form::textGroup('phone', trans('general.phone'), 'phone', []) }}
+
                     {{ Form::textGroup('tax_number', trans('general.tax_number'), 'percent', []) }}
 
                     {{ Form::textGroup('phone', trans('general.phone'), 'phone', []) }}

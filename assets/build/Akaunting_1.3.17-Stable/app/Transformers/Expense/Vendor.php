@@ -20,6 +20,8 @@ class Vendor extends TransformerAbstract
             'name' => $model->name,
             'email' => $model->email,
             'tax_number' => $model->tax_number,
+            'ic' => $model->ic,
+            'customer_id' => $model->customer_id,
             'phone' => $model->phone,
             'address' => $model->address,
             'website' => $model->website,

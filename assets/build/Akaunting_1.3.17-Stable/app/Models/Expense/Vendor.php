@@ -19,7 +19,7 @@ class Vendor extends Model
      *
      * @var array
      */
-    protected $fillable = ['company_id', 'name', 'email', 'tax_number', 'phone', 'address', 'website', 'currency_code', 'reference', 'enabled'];
+    protected $fillable = ['company_id', 'name', 'email', 'tax_number', 'ic', 'customer_id', 'phone', 'address', 'website', 'currency_code', 'reference', 'enabled'];
 
     /**
      * Sortable columns.

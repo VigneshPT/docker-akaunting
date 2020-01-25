@@ -29,6 +29,7 @@ class Bill extends TransformerAbstract
             'company_id' => $model->company_id,
             'bill_number' => $model->bill_number,
             'order_number' => $model->order_number,
+            'phone' =>  $model->phone,
             'bill_status_code' => $model->invoice_status_code,
             'billed_at' => $model->billed_at->toIso8601String(),
             'due_at' => $model->due_at->toIso8601String(),

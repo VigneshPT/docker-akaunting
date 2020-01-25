@@ -22,6 +22,12 @@
         </div>
         @stack('vendor_id_input_end')
 
+        {{ Form::textGroup('phone', trans('bills.phone'), 'phone', []) }}
+
+        <!-- {{ Form::textGroup('ic', trans('bills.ic'), 'file-text-o', []) }}
+
+        {{ Form::textGroup('customer_id', trans('bills.customer_id'), 'file-text-o', []) }} -->
+
         {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency')) }}
 
         {{ Form::textGroup('billed_at', trans('bills.bill_date'), 'calendar',['id' => 'billed_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'],Date::now()->toDateString()) }}
@@ -138,7 +144,7 @@
 
         {{ Form::fileGroup('attachment', trans('general.attachment')) }}
 
-        {{ Form::textGroup('cheque_number', trans('bills.cheque_number'), 'file-text-o', []) }}
+        <!-- {{ Form::textGroup('cheque_number', trans('bills.cheque_number'), 'file-text-o', []) }} -->
 
         {{ Form::hidden('vendor_name', old('vendor_name'), ['id' => 'vendor_name']) }}
         {{ Form::hidden('vendor_email', old('vendor_email'), ['id' => 'vendor_email']) }}

@@ -16,7 +16,7 @@ return [
     'transactions'          => 'Transaction|Transactions',
     'reports'               => 'Report|Reports',
     'settings'              => 'Setting|Settings',
-    'categories'            => 'Category|Categories',
+    'categories'            => 'Purchase|Categories',
     'currencies'            => 'Currency|Currencies',
     'tax_rates'             => 'Tax Rate|Tax Rates',
     'users'                 => 'User|Users',

@@ -10,10 +10,29 @@
     <title>@yield('title') - @setting('general.company_name')</title>
 
     <link rel="stylesheet" href="{{ asset('public/css/invoice.css?v=' . version('short')) }}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Bootstrap 3.3.6 -->
+    <script src="{{ asset('vendor/almasaeed2010/adminlte/bootstrap/js/bootstrap.min.js') }}"></script>
 
     <style type="text/css">
         * {
             font-family: DejaVu Sans;
+        }
+
+        @media screen and (max-width: 189px)  {
+            *{
+                font-size: 10px;
+            }
+
+            div .small-table{
+                text-align: center;
+                
+            }
+
+            .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+                padding: 1px;
+            }
+
         }
     </style>
 
