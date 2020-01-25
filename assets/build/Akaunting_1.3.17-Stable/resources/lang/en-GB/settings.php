@@ -99,5 +99,10 @@ return [
         'file_size'         => 'Max File Size (MB)',
         'file_types'        => 'Allowed File Types',
     ],
+    'branchID' => [
+        'tab'               => 'Branch ID',
+        'branchID'          => 'Branch ID',
+    ],
 
 ];
+

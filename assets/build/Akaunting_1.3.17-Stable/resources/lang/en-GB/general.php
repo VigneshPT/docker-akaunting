@@ -70,7 +70,7 @@ return [
     'email'                 => 'Email',
     'tax_number'            => 'Tax Number',
     'ic'                    => 'IC',
-    'customer_id'           => 'customer_id',
+    'customer_id'           => 'Customer ID',
     'phone'                 => 'Phone',
     'address'               => 'Address',
     'website'               => 'Website',

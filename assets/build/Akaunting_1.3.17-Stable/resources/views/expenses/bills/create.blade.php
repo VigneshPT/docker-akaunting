@@ -32,15 +32,15 @@
 
         {{ Form::textGroup('billed_at', trans('bills.bill_date'), 'calendar',['id' => 'billed_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'],Date::now()->toDateString()) }}
 
-        {{ Form::textGroup('phone', trans('bills.phone'), 'phone', []) }}
+        <!-- {{ Form::textGroup('phone', trans('bills.phone'), 'phone', []) }} -->
 
         {{ Form::textGroup('ic', trans('bills.ic'), 'file-text-o', []) }}
 
-        {{ Form::textGroup('customer_id', trans('bills.customer_id'), 'file-text-o', []) }}
+        {{ Form::textGroup('customer_id', trans('bills.customer_id'), 'file-text-o', ['readonly']) }}
 
         {{ Form::textGroup('due_at', trans('bills.due_date'), 'calendar',['id' => 'due_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'],Date::now()->toDateString()) }}
 
-        {{ Form::textGroup('bill_number', trans('bills.bill_number'), 'file-text-o') }}
+        {{ Form::textGroup('bill_number', trans('bills.bill_number'), 'file-text-o',['readonly'],$billNo) }}
 
         {{ Form::textGroup('order_number', trans('bills.order_number'), 'shopping-cart',[]) }}
 
@@ -487,10 +487,12 @@
                     $('#vendor_name').val(data.name);
                     $('#vendor_email').val(data.email);
                     $('#vendor_tax_number').val(data.tax_number);
-                    $('#vendor_phone').val(data.phone);
+                    $('#vendor_phone,#phone').val(data.phone);
                     $('#vendor_address').val(data.address);
-
+                    $('#ic').val(data.ic);
+                    $('#customer_id').val(data.customer_id);
                     $('#currency_code').val(data.currency_code);
+                    
                     $('#currency_rate').val(data.currency_rate);
 
                     $('.input-price').each(function(){
