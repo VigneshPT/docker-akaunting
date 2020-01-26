@@ -19,9 +19,9 @@
 
                     {{ Form::textGroup('phone', trans('general.phone'), 'phone', []) }}
 
-                    {{ Form::textGroup('IC', trans('general.ic'), 'envelope', []) }}
+                    {{ Form::textGroup('ic', trans('general.ic'), 'envelope', []) }}
 
-                    {{ Form::textGroup('CustomerID', trans('general.customer_id'), 'envelope', []) }}
+                    {{ Form::textGroup('customer_id', trans('general.customer_id'), 'envelope', ['readonly'],$totCustomerCnt) }}
 
                     {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency')) }}
 
