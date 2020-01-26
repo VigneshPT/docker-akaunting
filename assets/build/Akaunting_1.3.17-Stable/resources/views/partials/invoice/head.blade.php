@@ -23,9 +23,16 @@
                 font-size: 10px;
             }
 
+            strong {
+                font-size: 14px;
+            }
+
             div .small-table{
                 text-align: center;
-                
+                margin-left: -8px;
+                width: 187px;
+                table-layout: fixed;
+                word-wrap: break-word;
             }
 
             .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
