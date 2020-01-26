@@ -24,6 +24,7 @@
                     <li class=""><a href="#scheduling" data-toggle="tab" aria-expanded="false">{{ trans('settings.scheduling.tab') }}</a></li>
                     <li class=""><a href="#appearance" data-toggle="tab" aria-expanded="false">{{ trans('settings.appearance.tab') }}</a></li>
                     <li class=""><a href="#system" data-toggle="tab" aria-expanded="false">{{ trans('settings.system.tab') }}</a></li>
+                    <li class=""><a href="#branchID" data-toggle="tab" aria-expanded="false">{{ trans('settings.branchID.tab') }}</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -136,6 +137,9 @@
                         {{ Form::textGroup('file_size', trans('settings.system.file_size'), 'upload', []) }}
 
                         {{ Form::textGroup('file_types', trans('settings.system.file_types'), 'file-o', []) }}
+                    </div>
+                    <div class="tab-pane tab-margin" id="branchID">
+                        {{ Form::textGroup('branchID', trans('settings.branchID.branchID'), 'file-o', []) }}
                     </div>
 
                     @permission('update-settings-settings')

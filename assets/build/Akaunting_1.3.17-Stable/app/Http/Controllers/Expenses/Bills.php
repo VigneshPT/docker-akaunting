@@ -105,7 +105,11 @@ class Bills extends Controller
 
         $categories = Category::enabled()->type('expense')->orderBy('name', 'desc')->pluck('name', 'id');
 
-        return view('expenses.bills.create', compact('vendors', 'currencies', 'currency', 'items', 'taxes', 'categories'));
+        $totalBillSubmitted = Bill::find(session('company_id'))->count();
+        $totalBillSubmitted = str_pad($totalBillSubmitted+1,3,0,STR_PAD_LEFT);
+        $billNo = date('Y').date('m').date('d').setting('general.branchID').$totalBillSubmitted;
+
+        return view('expenses.bills.create', compact('vendors', 'currencies', 'currency', 'items', 'taxes', 'categories','billNo'));
     }
 
     /**

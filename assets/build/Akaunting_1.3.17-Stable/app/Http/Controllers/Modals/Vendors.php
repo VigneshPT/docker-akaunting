@@ -48,8 +48,9 @@ class Vendors extends Controller
         }
 
         $rand = rand();
-
-        $html = view('modals.vendors.create', compact('currencies', 'vendor_selector', 'rand'))->render();
+        $totCustomerCnt = Vendor::get()->count();
+        $totCustomerCnt = str_pad($totCustomerCnt+1,4,0,STR_PAD_LEFT);
+        $html = view('modals.vendors.create', compact('currencies', 'vendor_selector', 'rand','totCustomerCnt'))->render();
 
         return response()->json([
             'success' => true,
