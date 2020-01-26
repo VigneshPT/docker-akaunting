@@ -24,9 +24,21 @@
                 font-size: 10px;
             }
 
+            th{
+                padding: 8px;   
+            }
+
+            .container{
+                padding-right: 18px;
+            }
+
             div .small-table{
+                margin-top: 10px;
                 text-align: center;
-                
+                margin-left: -12px;
+                width: 187px;
+                table-layout: fixed;
+                word-wrap: break-word;
             }
 
             .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
