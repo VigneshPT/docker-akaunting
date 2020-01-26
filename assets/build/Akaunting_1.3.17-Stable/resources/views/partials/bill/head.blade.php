@@ -28,6 +28,10 @@
                 padding: 8px;   
             }
 
+            .container{
+                padding-right: 18px;
+            }
+
             div .small-table{
                 margin-top: 10px;
                 text-align: center;
