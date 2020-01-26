@@ -6,7 +6,6 @@
 <!-- Default box -->
 <div class="box box-success">
     {!! Form::open(['url' => 'expenses/bills', 'files' => true, 'role' => 'form', 'class' => 'form-loading-button']) !!}
-
     <div class="box-body">
         @stack('vendor_id_input_start')
         <div class="form-group col-md-6 required {{ $errors->has('vendor_id') ? 'has-error' : ''}}">
@@ -158,7 +157,13 @@
     <!-- /.box-body -->
 
     <div class="box-footer">
-        {{ Form::saveButtons('expenses/bills') }}
+        <!-- {{ Form::saveButtons('expenses/bills') }} -->
+        {!! Form::button('<span class="fa fa-save"></span> &nbsp;' . trans('general.save'), ['type' => 'submit', 'class' => 'btn btn-success  button-submit', 'data-loading-text' => trans('general.loading')]) !!}
+
+        {!! Form::button('<span class="fa fa-print"></span> &nbsp;' . trans('general.saveprint'), ['type' => 'submit', 'class' => 'btn btn-success  button-submit','name'=>'savePrint', 'value' => 'savePrint', 'data-loading-text' => trans('general.loading')]) !!}
+
+        <a href="{{ asset('expenses/bills') }}" class="btn btn-default"><span class="fa fa-times-circle"></span> &nbsp;{{ trans('general.cancel') }}</a>
+        
     </div>
     <!-- /.box-footer -->
 
@@ -251,7 +256,8 @@
                     }
                 }
             });
-
+            
+            
             $('#vendor_id').select2({
                 placeholder: "{{ trans('general.form.select.field', ['field' => trans_choice('general.vendors', 1)]) }}"
             });
@@ -366,7 +372,6 @@
             input_id = $(this).attr('id').split('-');
 
             item_id = parseInt(input_id[input_id.length-1]);
-
             $(this).typeahead({
                 minLength: 0,
                 items: "all",   
@@ -417,7 +422,6 @@
 
         $(document).on('click', '#tax-add-new', function(e) {
             tax_name = $('.select2-search__field').val();
-
             $('body > .select2-container.select2-container--default.select2-container--open').remove();
 
             $('#modal-create-tax').remove();
@@ -490,7 +494,8 @@
                     $('#vendor_phone,#phone').val(data.phone);
                     $('#vendor_address').val(data.address);
                     $('#ic').val(data.ic);
-                    $('#customer_id').val(data.customer_id);
+                    var customerIDGen = (data.id).toString().padStart(4,'0');
+                    $('#customer_id').val(customerIDGen);
                     $('#currency_code').val(data.currency_code);
                     
                     $('#currency_rate').val(data.currency_rate);
@@ -513,6 +518,7 @@
                         });
 
                         $(this).val(amount);
+                        $("#amount").val(amount);
 
                         $(this).trigger('focusout');
                     });
@@ -609,6 +615,7 @@
                             });
 
                             $(this).val(amount);
+                            $("#amount").val(amount);
 
                             $(this).trigger('focusout');
                         });

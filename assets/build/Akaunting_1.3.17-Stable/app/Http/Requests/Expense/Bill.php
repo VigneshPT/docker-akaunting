@@ -35,7 +35,7 @@ class Bill extends Request
         $company_id = $this->request->get('company_id');
 
         return [
-            'bill_number' => 'required|string|unique:bills,NULL,' . $id . ',id,company_id,' . $company_id . ',deleted_at,NULL',
+            /*'bill_number' => 'required|string|unique:bills,NULL,' . $id . ',id,company_id,' . $company_id . ',deleted_at,NULL',*/
             'bill_status_code' => 'required|string',
             'billed_at' => 'required|date_format:Y-m-d H:i:s',
             'due_at' => 'required|date_format:Y-m-d H:i:s',
