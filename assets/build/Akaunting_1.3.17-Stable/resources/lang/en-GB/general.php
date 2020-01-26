@@ -91,6 +91,7 @@ return [
     'from'                  => 'From',
     'to'                    => 'To',
     'print'                 => 'Print',
+    'saveprint'                 => 'Save & Print',
     'search'                => 'Search',
     'search_placeholder'    => 'Type to search..',
     'filter'                => 'Filter',

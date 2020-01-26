@@ -93,6 +93,7 @@ class Bills extends Controller
      */
     public function create()
     {
+
         $vendors = Vendor::enabled()->orderBy('name')->pluck('name', 'id');
 
         $currencies = Currency::enabled()->orderBy('name')->pluck('name', 'code');
@@ -105,13 +106,15 @@ class Bills extends Controller
 
         $categories = Category::enabled()->type('expense')->orderBy('name', 'desc')->pluck('name', 'id');
 
-        $totalBillSubmitted = Bill::find(session('company_id'))->count();
-        $totalBillSubmitted = str_pad($totalBillSubmitted+1,3,0,STR_PAD_LEFT);
-        $billNo = date('Y').date('m').date('d').setting('general.branchID').$totalBillSubmitted;
+        $billNo = $this->generateBillNo();
 
         return view('expenses.bills.create', compact('vendors', 'currencies', 'currency', 'items', 'taxes', 'categories','billNo'));
     }
-
+    public function generateBillNo(){
+        $totalBillSubmitted = Bill::find(session('company_id'))->count();
+        $totalBillSubmitted = str_pad($totalBillSubmitted+1,3,0,STR_PAD_LEFT);
+        return $billNo = date('Y').date('m').date('d').setting('general.branchID').$totalBillSubmitted;
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -121,13 +124,31 @@ class Bills extends Controller
      */
     public function store(Request $request)
     {
+        $request['bill_number'] = $this->generateBillNo();
+        if($request['savePrint'] == 'savePrint'){
+            $request['bill_status_code'] = 'paid';
+            $bill = dispatch(new CreateBill($request));
+            $request['payment_method'] = setting('general.default_payment_method');
+            $request['description'] = 'immediate paid while bill creation';
+            $request['paid_at'] = date('Y-m-d');
+            $request['account_id'] = setting('general.default_account');
+            $request['bill_id'] = $bill->id;
+            $createBillFunc = new CreateBillPayment($request,$bill);
+            $response = $createBillFunc->createExpBillPayment($bill,$request);
+            if($response['error']){
+                //error handling
+            }
+            return redirect('expenses/bills/' . $bill->id. '/print');
+        }
         $bill = dispatch(new CreateBill($request));
 
         $message = trans('messages.success.added', ['type' => trans_choice('general.bills', 1)]);
 
         flash($message)->success();
 
-        return redirect('expenses/bills/' . $bill->id);
+        return redirect('expenses/bills/' . $bill->id);    
+        
+        
     }
 
     /**
@@ -387,6 +408,7 @@ class Bills extends Controller
      */
     public function payment(PaymentRequest $request)
     {
+        dd($request);
         // Get currency object
         $currencies = Currency::enabled()->pluck('rate', 'code')->toArray();
         $currency = Currency::where('code', $request['currency_code'])->first();
