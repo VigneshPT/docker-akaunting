@@ -36,7 +36,7 @@
         {{ Form::textGroup('ic', trans('bills.ic'), 'file-text-o', []) }}
 
         {{ Form::textGroup('customer_id', trans('bills.customer_id'), 'file-text-o', ['readonly']) }}
-
+        {{ Form::textGroup('cheque_number', trans('bills.cheque_number'), 'file-text-o', []) }}
         {{ Form::textGroup('due_at', trans('bills.due_date'), 'calendar',['id' => 'due_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'],Date::now()->toDateString()) }}
 
         {{ Form::textGroup('bill_number', trans('bills.bill_number'), 'file-text-o',['readonly'],$billNo) }}
