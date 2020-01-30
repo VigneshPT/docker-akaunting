@@ -93,7 +93,7 @@ class Bills extends Controller
      */
     public function create()
     {
-
+        
         $vendors = Vendor::enabled()->orderBy('name')->pluck('name', 'id');
 
         $currencies = Currency::enabled()->orderBy('name')->pluck('name', 'code');
@@ -111,9 +111,10 @@ class Bills extends Controller
         return view('expenses.bills.create', compact('vendors', 'currencies', 'currency', 'items', 'taxes', 'categories','billNo'));
     }
     public function generateBillNo(){
-        $totalBillSubmitted = Bill::find(session('company_id'))->count();
+        $dateValue = date("Y-m-d");
+        $totalBillSubmitted = Bill::where('company_id',session('company_id'))->whereRaw('date(created_at) = "'.$dateValue.'" ')->count();
         $totalBillSubmitted = str_pad($totalBillSubmitted+1,3,0,STR_PAD_LEFT);
-        return $billNo = date('Y').date('m').date('d').setting('general.branchID').$totalBillSubmitted;
+        return $billNo = str_replace('-','',$dateValue).setting('general.branchID').$totalBillSubmitted;
     }
     /**
      * Store a newly created resource in storage.
