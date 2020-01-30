@@ -113,8 +113,9 @@ class Bills extends Controller
     public function generateBillNo(){
         $dateValue = date("Y-m-d");
         $totalBillSubmitted = Bill::where('company_id',session('company_id'))->whereRaw('date(created_at) = "'.$dateValue.'" ')->count();
-        $totalBillSubmitted = str_pad($totalBillSubmitted+1,3,0,STR_PAD_LEFT); 
-        return $billNo = str_replace('-','',$dateValue).setting('general.branchID').$totalBillSubmitted;
+        $totalBillSubmitted = str_pad($totalBillSubmitted+1,3,0,STR_PAD_LEFT);
+        $billNo = str_replace('-','',$dateValue).setting('general.branchID').$totalBillSubmitted;
+        return str_replace(' ','', $billNo);
     }
     /**
      * Store a newly created resource in storage.
