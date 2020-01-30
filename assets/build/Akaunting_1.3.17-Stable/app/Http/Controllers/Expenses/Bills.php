@@ -93,7 +93,7 @@ class Bills extends Controller
      */
     public function create()
     {
-        
+
         $vendors = Vendor::enabled()->orderBy('name')->pluck('name', 'id');
 
         $currencies = Currency::enabled()->orderBy('name')->pluck('name', 'code');
@@ -113,7 +113,7 @@ class Bills extends Controller
     public function generateBillNo(){
         $dateValue = date("Y-m-d");
         $totalBillSubmitted = Bill::where('company_id',session('company_id'))->whereRaw('date(created_at) = "'.$dateValue.'" ')->count();
-        $totalBillSubmitted = str_pad($totalBillSubmitted+1,3,0,STR_PAD_LEFT);
+        $totalBillSubmitted = str_pad($totalBillSubmitted+1,3,0,STR_PAD_LEFT); 
         return $billNo = str_replace('-','',$dateValue).setting('general.branchID').$totalBillSubmitted;
     }
     /**
