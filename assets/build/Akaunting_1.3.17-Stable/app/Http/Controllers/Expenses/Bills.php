@@ -128,12 +128,31 @@ class Bills extends Controller
     {
         $request['bill_number'] = $this->generateBillNo();
         if($request['savePrint'] == 'savePrint'){
+            if($request['cheque_number'] != ''){
+                $accountExists = Account::where('company_id',session('company_id'))->whereRaw('lower(name) = "cheque"')->first();
+                if($accountExists && $accountExists->id){
+                    $request['account_id'] = $accountExists->id;
+                }else{
+                    $checkAccountDetails['number'] = $request['cheque_number'];;
+                    $checkAccountDetails['currency_code'] = $request['currency_code'];
+                    $checkAccountDetails['name'] = "Cheque";
+                    $checkAccountDetails['opening_balance'] = 0.0;
+                    $checkAccountDetails['bank_name'] = '';
+                    $checkAccountDetails['bank_phone'] = '';
+                    $checkAccountDetails['bank_address'] = '';
+                    $checkAccountDetails['enabled'] = '1';
+                    $checkAccountDetails['company_id'] = $request['company_id'];    
+                    $ac = Account::create($checkAccountDetails);      
+                    $request['account_id'] = $ac->id;
+                }   
+            }else{
+                $request['account_id'] = setting('general.default_account');
+            }
             $request['bill_status_code'] = 'paid';
             $bill = dispatch(new CreateBill($request));
             $request['payment_method'] = setting('general.default_payment_method');
             $request['description'] = 'immediate paid while bill creation';
             $request['paid_at'] = date('Y-m-d');
-            $request['account_id'] = setting('general.default_account');
             $request['bill_id'] = $bill->id;
             $createBillFunc = new CreateBillPayment($request,$bill);
             $response = $createBillFunc->createExpBillPayment($bill,$request);
