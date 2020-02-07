@@ -1,3 +1,4 @@
+
 @extends('layouts.admin')
 
 @section('title', trans('general.title.new', ['type' => trans_choice('general.bills', 1)]))
@@ -7,6 +8,11 @@
 <div class="box box-success">
     {!! Form::open(['url' => 'expenses/bills', 'files' => true, 'role' => 'form', 'class' => 'form-loading-button']) !!}
     <div class="box-body">
+        
+        <div class="col-md-12" style="padding:0">
+        {{ Form::textGroup('global_search', trans('bills.global_search'), 'search', []),'globalSearch' }}
+        </div>
+
         @stack('vendor_id_input_start')
         <div class="form-group col-md-6 required {{ $errors->has('vendor_id') ? 'has-error' : ''}}">
             {!! Form::label('vendor_id', trans_choice('general.vendors', 1), ['class' => 'control-label']) !!}
@@ -124,7 +130,7 @@
         </div>
 
         {{ Form::textareaGroup('notes', trans_choice('general.notes', 2)) }}
-
+<a href="{{ asset('expenses/bills') }}/{{session('billId')}}/print" id="printBtn2" target='_blank'>PrintBtn</a>
         @stack('category_id_input_start')
         <div class="form-group col-md-6 required {{ $errors->has('category_id') ? 'has-error' : ''}}">
             {!! Form::label('category_id', trans_choice('general.categories', 1), ['class' => 'control-label']) !!}
@@ -155,7 +161,6 @@
         {{ Form::hidden('amount', old('amount', '0'), ['id' => 'amount']) }}
     </div>
     <!-- /.box-body -->
-
     <div class="box-footer">
         <!-- {{ Form::saveButtons('expenses/bills') }} -->
         {!! Form::button('<span class="fa fa-save"></span> &nbsp;' . trans('general.save'), ['type' => 'submit', 'class' => 'btn btn-success  button-submit', 'data-loading-text' => trans('general.loading')]) !!}
@@ -172,6 +177,7 @@
 @endsection
 
 @push('js')
+    
     <script src="{{ asset('vendor/almasaeed2010/adminlte/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
     @if (language()->getShortCode() != 'en')
     <script src="{{ asset('vendor/almasaeed2010/adminlte/plugins/datepicker/locales/bootstrap-datepicker.' . language()->getShortCode() . '.js') }}"></script>
@@ -179,13 +185,29 @@
     <script src="{{ asset('public/js/bootstrap-fancyfile.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
     <script src="{{ asset('vendor/almasaeed2010/adminlte/plugins/colorpicker/bootstrap-colorpicker.js') }}"></script>
+
+
 @endpush
 
 @push('css')
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="{{ asset('vendor/almasaeed2010/adminlte/plugins/datepicker/datepicker3.css') }}">
     <link rel="stylesheet" href="{{ asset('public/css/bootstrap-fancyfile.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/almasaeed2010/adminlte/plugins/colorpicker/bootstrap-colorpicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/almasaeed2010/adminlte/plugins/colorpicker/bootstrap-colorpicker.css') }}">   
 @endpush
+
+@if (session('billId'))
+        <div class="alert alert-success">
+            @push('scripts')
+            <script type="text/javascript">
+                var redirectUrl = "{{ asset('expenses/bills') }}/{{session('billId')}}/print";
+                window.open(redirectUrl);
+                window.location = "{{ route('bills.index') }}";
+            </script>
+            @endpush
+        </div>
+@endif
+
 
 @push('stylesheet')
     <style type="text/css">
@@ -198,15 +220,62 @@
 @endpush
 
 @push('scripts')
+    
     <script type="text/javascript">
         var focus = false;
         var item_row = '{{ $item_row }}';
         var autocomplete_path = "{{ url('common/items/autocomplete') }}";
+        var globalCustomerSearchPath = "{{ route('search.customer') }}";
+
+
+        $( function() {
+             $( "#global_search" ).autocomplete({
+              source: function( request, response ) {
+               // Fetch data
+               $.ajax({
+                url: globalCustomerSearchPath,
+                type: 'get',
+                dataType: "json",
+                data: {
+                 search: request.term
+                },
+                success: function( data ) {
+                 response( data );
+                }
+               });
+              },
+              select: function (event, ui) {
+                $('#global_search').val(ui.item.name);
+                $("#vendor_id").val(ui.item.value);
+                $('#vendor_id').select2().trigger('change');
+                $('#vendor_name').val(ui.item.name);
+                $('#vendor_email').val(ui.item.email);
+                $('#vendor_tax_number').val(ui.item.tax_number);
+                $('#vendor_phone,#phone').val(ui.item.phone);
+                $('#vendor_address').val(ui.item.address);
+                $('#ic').val(ui.item.ic);
+                var customerIDGen = (ui.item.value).toString().padStart(4,'0');
+                $('#customer_id').val(customerIDGen);
+                $('#currency_code').val(ui.item.currency_code);
+                
+                $('#currency_rate').val(ui.item.currency_rate);
+                return false;
+
+
+               // Set selection
+               //$('#autocomplete').val(ui.item.label); // display the selected text
+               //$('#selectuser_id').val(ui.item.value); // save selected id to input
+               //return false;
+              }
+             });
+         } );
+
 
         $(document).ready(function() {
             @if (old('item'))
             $('#vendor_id').trigger('change');
             @endif
+
 
             itemTableResize();
 
@@ -622,6 +691,12 @@
                     }
                 }
             });
+        }
+
+
+
+        function searchCustomer(obj){
+            alert(obj.value);
         }
     </script>
 @endpush

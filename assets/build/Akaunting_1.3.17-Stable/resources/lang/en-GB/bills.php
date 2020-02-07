@@ -8,6 +8,7 @@ return [
     'due_date'              => 'Due Date',
     'order_number'          => 'Order Number',
     'cheque_number'         => 'Cheque Number',
+    'global_search'         => 'Customer Global Search',
     'ic'                    => 'IC',
     'customer_id'           => 'customer_id',
     'phone'                 => 'Phone',

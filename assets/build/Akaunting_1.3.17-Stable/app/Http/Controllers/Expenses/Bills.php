@@ -34,6 +34,7 @@ use App\Utilities\ImportFile;
 use App\Utilities\Modules;
 use Date;
 use File;
+use Redirect;
 use Image;
 use Storage;
 
@@ -159,7 +160,8 @@ class Bills extends Controller
             if($response['error']){
                 //error handling
             }
-            return redirect('expenses/bills/' . $bill->id. '/print');
+            //$url = 'expenses/bills/' . $bill->id. '/print';
+            return redirect()->route('bills.create')->with('billId', $bill->id);
         }
         $bill = dispatch(new CreateBill($request));
 
@@ -635,4 +637,5 @@ class Bills extends Controller
 
         return $bill;
     }
+    
 }

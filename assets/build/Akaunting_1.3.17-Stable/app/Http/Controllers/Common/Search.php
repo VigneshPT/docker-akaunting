@@ -11,6 +11,7 @@ use App\Models\Income\Invoice;
 use App\Models\Income\Revenue;
 use App\Models\Income\Customer;
 use App\Models\Common\Item;
+use Request;
 
 class Search extends Controller
 {
@@ -126,5 +127,19 @@ class Search extends Controller
         }
 
         return response()->json((object) $results);
+    }
+    public function getConcatCondition($feild){
+        if($feild == 'name'){
+            return "IF(".$feild." IS NULL,'',".$feild.")";
+        }else{
+            return "IF(".$feild." IS NULL,'',', '),IF(".$feild." IS NULL,'',".$feild.")";    
+        }
+        
+    }
+    public function customerSearch(){
+        $searchKeyword = request()->search;
+        //$concatLabel = concat(IF(name IS NULL,name,''),)
+        $result = Vendor::selectRaw(' concat('.$this->getConcatCondition("name").','.$this->getConcatCondition("email").','.$this->getConcatCondition("phone").','.$this->getConcatCondition("ic").') as label,`id` as value, `company_id`, `user_id`, `name`, `email`, `tax_number`, `phone`, `address`, `website`, `currency_code`, `enabled`, `created_at`, `updated_at`, `deleted_at`, `reference`, `ic`, `customer_id`')->whereRaw("company_id = ".session('company_id')." and enabled = 1 and (name like '%".$searchKeyword."%' or email like '%".$searchKeyword."%' or phone like '%".$searchKeyword."%' or ic like '%".$searchKeyword."%' ) ")->get();
+        return response()->json($result);
     }
 }

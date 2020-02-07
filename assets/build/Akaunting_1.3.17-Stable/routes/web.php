@@ -59,6 +59,7 @@ Route::group(['middleware' => 'language'], function () {
                 Route::get('items/{item}/disable', 'Common\Items@disable')->name('items.disable');
                 Route::resource('items', 'Common\Items', ['middleware' => ['money']]);
                 Route::get('search/search', 'Common\Search@search')->name('search.search');
+                Route::get('search/customer', 'Common\Search@customerSearch')->name('search.customer');
                 Route::resource('search', 'Common\Search');
                 Route::post('notifications/disable', 'Common\Notifications@disable')->name('notifications.disable');
             });

@@ -44,6 +44,7 @@
 
     <!-- jQuery 2.2.3 -->
     <script src="{{ asset('vendor/almasaeed2010/adminlte/plugins/jQuery/jquery-2.2.3.min.js') }}"></script>
+    <script src="{{ asset('public/js/jquery-ui.js') }}"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="{{ asset('vendor/almasaeed2010/adminlte/bootstrap/js/bootstrap.min.js') }}"></script>
     <!-- SlimScroll -->
