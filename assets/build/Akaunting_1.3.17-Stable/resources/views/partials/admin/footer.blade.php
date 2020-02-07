@@ -6,5 +6,5 @@
     </div> -->
     <!-- <strong>{{ trans('footer.powered') }}</strong>: <a href="{{ trans('footer.link') }}" target="_blank">{{ trans('footer.software') }}</a> -->
 </footer>
-
+ 
 @stack('footer_end')
