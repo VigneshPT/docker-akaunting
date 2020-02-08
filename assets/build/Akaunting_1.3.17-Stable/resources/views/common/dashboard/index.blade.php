@@ -78,6 +78,7 @@
 
     <div class="row">
         <!---Income, Expense and Profit Line Chart-->
+        @if ($auth_user->can('read-cash-flow-chart'))
         <div class="col-md-12">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -99,9 +100,12 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 
+    
     <div class="row">
+        @if ($auth_user->can('read-income-by-category'))
         <div class="col-md-6">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -115,7 +119,8 @@
                 </div>
             </div>
         </div>
-
+        @endif
+        @if ($auth_user->can('read-expense-by-category'))
         <div class="col-md-6">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -129,10 +134,12 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 
     <div class="row">
         <!-- Account Balance List-->
+        @if ($auth_user->can('read-account-balance'))
         <div class="col-md-4">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -159,7 +166,8 @@
                 </div>
             </div>
         </div>
-
+        @endif
+        @if ($auth_user->can('read-latest-incomes'))
         <!-- Latest Incomes List-->
         <div class="col-md-4">
             <div class="box box-success">
@@ -195,7 +203,8 @@
                 </div>
             </div>
         </div>
-
+        @endif
+        @if ($auth_user->can('read-latest-expenses'))
         <!-- Latest Expenses List-->
         <div class="col-md-4">
             <div class="box box-success">
@@ -231,6 +240,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 @endsection
 

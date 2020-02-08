@@ -139,7 +139,7 @@ class Search extends Controller
     public function customerSearch(){
         $searchKeyword = request()->search;
         //$concatLabel = concat(IF(name IS NULL,name,''),)
-        $result = Vendor::selectRaw(' concat('.$this->getConcatCondition("name").','.$this->getConcatCondition("email").','.$this->getConcatCondition("phone").','.$this->getConcatCondition("ic").') as label,`id` as value, `company_id`, `user_id`, `name`, `email`, `tax_number`, `phone`, `address`, `website`, `currency_code`, `enabled`, `created_at`, `updated_at`, `deleted_at`, `reference`, `ic`, `customer_id`')->whereRaw("company_id = ".session('company_id')." and enabled = 1 and (name like '%".$searchKeyword."%' or email like '%".$searchKeyword."%' or phone like '%".$searchKeyword."%' or ic like '%".$searchKeyword."%' ) ")->get();
+        $result = Vendor::selectRaw(' concat('.$this->getConcatCondition("name").','.$this->getConcatCondition("email").','.$this->getConcatCondition("phone").','.$this->getConcatCondition("ic").') as label,`id` as value, `company_id`, `user_id`, `name`, `email`, `tax_number`, `phone`, `address`, `website`, `currency_code`, `enabled`, `created_at`, `updated_at`, `deleted_at`, `reference`, `ic`, `customer_id`')->whereRaw("company_id = ".session('company_id')." and enabled = 1 and (id like '%".$searchKeyword."%' or name like '%".$searchKeyword."%' or email like '%".$searchKeyword."%' or phone like '%".$searchKeyword."%' or ic like '%".$searchKeyword."%' ) ")->get();
         return response()->json($result);
     }
 }
