@@ -5,14 +5,10 @@
 @section('content')
     <div class="row">
         <!---Income-->
+        @if ($auth_user->can('read-reports-income-summary'))
         <div class="col-md-4">
             <div class="info-box">
-                @if ($auth_user->can('read-reports-income-summary'))
                 <a href="{{ url('reports/income-summary') }}"><span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span></a>
-                @else
-                <span class="info-box-icon bg-aqua"><i class="fa fa-money"></i></span>
-                @endif
-
                 <div class="info-box-content">
                     <span class="info-box-text">{{ trans('dashboard.total_incomes') }}</span>
                     <span class="info-box-number">@money($total_incomes['total'], setting('general.default_currency'), true)</span>
@@ -26,16 +22,12 @@
                 </div>
             </div>
         </div>
-
+        @endif
         <!---Expense-->
+        @if ($auth_user->can('read-reports-expense-summary'))
         <div class="col-md-4">
             <div class="info-box">
-                @if ($auth_user->can('read-reports-expense-summary'))
                 <a href="{{ url('reports/expense-summary') }}"><span class="info-box-icon bg-red"><i class="fa fa-shopping-cart"></i></span></a>
-                @else
-                <span class="info-box-icon bg-red"><i class="fa fa-shopping-cart"></i></span>
-                @endif
-
                 <div class="info-box-content">
                     <span class="info-box-text">{{ trans('dashboard.total_expenses') }}</span>
                     <span class="info-box-number">@money($total_expenses['total'], setting('general.default_currency'), true)</span>
@@ -50,16 +42,12 @@
                 </div>
             </div>
         </div>
-
+        @endif
         <!---Profit-->
+        @if ($auth_user->can('read-reports-income-expense-summary'))
         <div class="col-md-4">
             <div class="info-box">
-                @if ($auth_user->can('read-reports-income-expense-summary'))
                 <a href="{{ url('reports/income-expense-summary') }}"><span class="info-box-icon bg-green"><i class="fa fa-heart"></i></span></a>
-                @else
-                <span class="info-box-icon bg-green"><i class="fa fa-heart"></i></span>
-                @endif
-
                 <div class="info-box-content">
                     <span class="info-box-text">{{ trans('dashboard.total_profit') }}</span>
                     <span class="info-box-number">@money($total_profit['total'], setting('general.default_currency'), true)</span>
@@ -74,6 +62,7 @@
                 </div>
             </div>
         </div>
+        @endif
     </div>
 
     <div class="row">
