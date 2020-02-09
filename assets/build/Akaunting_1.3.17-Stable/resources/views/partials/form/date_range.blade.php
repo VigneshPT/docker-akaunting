@@ -12,12 +12,18 @@
         $('.date-range-btn').daterangepicker(
             {
                 ranges   : {
+                    @if ($auth_user->can('read-transaction-today-date-range') or $auth_user->can('read-transaction-default-date-range'))
                     '{{ trans("general.date_range.today") }}'       : [moment(), moment()],
+                    @endif
+                    @if ($auth_user->can('read-transaction-yesterday-date-range') or $auth_user->can('read-transaction-default-date-range'))
                     '{{ trans("general.date_range.yesterday") }}'   : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    @endif
+                    @if ($auth_user->can('read-transaction-default-date-range'))
                     '{{ trans("general.date_range.last_days", ["day" => "7"]) }}' : [moment().subtract(6, 'days'), moment()],
                     '{{ trans("general.date_range.last_days", ["day" => "30"]) }}': [moment().subtract(29, 'days'), moment()],
                     '{{ trans("general.date_range.this_month") }}'  : [moment().startOf('month'), moment().endOf('month')],
-                    '{{ trans("general.date_range.last_month") }}'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    '{{ trans("general.date_range.last_month") }}'  : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                    @endif
                 },
                 startDate: moment().subtract(29, 'days'),
                 endDate  : moment()
@@ -44,3 +50,10 @@
     });
 </script>
 @endpush
+@if (!($auth_user->can('read-transaction-default-date-range') or $auth_user->can('read-transaction-custom-date-range')))
+<style>
+.ranges li:last-child { display: none; }
+.daterangepicker .calendar.left{display: none;}
+.daterangepicker .calendar.right{display: none;}
+</style>
+@endif

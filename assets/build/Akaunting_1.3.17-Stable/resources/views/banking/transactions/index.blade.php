@@ -15,10 +15,22 @@
             {!! Form::select('categories[]', $categories, request('categories'), ['id' => 'filter-categories', 'class' => 'form-control input-filter input-lg', 'multiple' => 'multiple']) !!}
             {!! Form::button('<span class="fa fa-filter"></span> &nbsp;' . trans('general.filter'), ['type' => 'submit', 'class' => 'btn btn-sm btn-default btn-filter']) !!}
         </div>
+
         <div class="pull-right">
             <span class="title-filter hidden-xs">{{ trans('general.show') }}:</span>
             {!! Form::select('limit', $limits, request('limit', setting('general.list_limit', '25')), ['class' => 'form-control input-filter input-sm', 'onchange' => 'this.form.submit()']) !!}
         </div>
+
+        <div class="pull-right col-md-1">
+            <span>{{ trans('Total Sum') }} <b>@money($totalMoneyDetails['sumAmt'], setting('general.default_currency'), true)</b></span>
+        </div>
+        <div class="pull-right col-md-1">
+            <span>{{ trans('Expenses') }} @money($totalMoneyDetails['expense'], setting('general.default_currency'), true)</span>
+        </div>
+        <div class="pull-right col-md-1">
+            <span>{{ trans('Income') }} @money($totalMoneyDetails['income'], setting('general.default_currency'), true)</span>
+        </div>
+        
         {!! Form::close() !!}
     </div>
     <!-- /.box-header -->
@@ -87,3 +99,4 @@
     });
 </script>
 @endpush
+

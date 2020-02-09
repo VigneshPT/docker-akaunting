@@ -46,8 +46,20 @@ class Transactions extends Controller
         }
 
         $transactions = $this->getTransactions($request);
-
-        return view('banking.transactions.index', compact('transactions', 'accounts', 'types', 'categories'));
+        $totalIncome = 0;
+        $totalExpense = 0;
+        foreach($transactions as $val){
+            if($val->type == 'Purchase'){
+                $totalExpense = $totalExpense +  $val->amount;
+            }
+            if($val->type == 'Sale'){
+                $totalIncome = $totalIncome +  $val->amount;
+            }
+        }
+        $totalMoneyDetails['income'] = $totalIncome;
+        $totalMoneyDetails['expense'] = $totalExpense;
+        $totalMoneyDetails['sumAmt'] = $totalIncome - $totalExpense;
+        return view('banking.transactions.index', compact('transactions', 'accounts', 'types', 'categories','totalMoneyDetails'));
     }
 
     /**

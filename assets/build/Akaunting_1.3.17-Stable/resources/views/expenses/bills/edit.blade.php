@@ -8,17 +8,17 @@
         {!! Form::model($bill, ['method' => 'PATCH', 'files' => true, 'url' => ['expenses/bills', $bill->id], 'role' => 'form', 'class' => 'form-loading-button']) !!}
 
         <div class="box-body">
-            {{ Form::selectGroup('vendor_id', trans_choice('general.vendors', 1), 'user', $vendors) }}
+            {{ Form::selectGroup('vendor_id', trans_choice('general.vendors', 1), 'user', $vendors,'',[],'col-md-4') }}
 
-            {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies) }}
+            {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies,'',[],'col-md-4') }}
 
-            {{ Form::textGroup('billed_at', trans('bills.bill_date'), 'calendar', ['id' => 'billed_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask' => '', 'autocomplete' => 'off'], Date::parse($bill->billed_at)->toDateString()) }}
+            {{ Form::textGroup('billed_at', trans('bills.bill_date'), 'calendar', ['id' => 'billed_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask' => '', 'autocomplete' => 'off'], Date::parse($bill->billed_at)->toDateString(),'col-md-4') }}
 
-            {{ Form::textGroup('due_at', trans('bills.due_date'), 'calendar', ['id' => 'due_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask' => '', 'autocomplete' => 'off'], Date::parse($bill->due_at)->toDateString()) }}
+            {{ Form::textGroup('due_at', trans('bills.due_date'), 'calendar', ['id' => 'due_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask' => '', 'autocomplete' => 'off'], Date::parse($bill->due_at)->toDateString(),'col-md-4') }}
 
-            {{ Form::textGroup('bill_number', trans('bills.bill_number'), 'file-text-o') }}
+            {{ Form::textGroup('bill_number', trans('bills.bill_number'), 'file-text-o',[],'','col-md-4') }}
 
-            {{ Form::textGroup('order_number', trans('bills.order_number'), 'shopping-cart',[]) }}
+            {{ Form::textGroup('order_number', trans('bills.order_number'), 'shopping-cart',[],'','col-md-4') }}
 
             <div class="form-group col-md-12">
                 {!! Form::label('items', trans_choice('general.items', 2), ['class' => 'control-label']) !!}

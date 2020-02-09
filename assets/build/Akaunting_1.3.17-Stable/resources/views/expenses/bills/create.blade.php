@@ -8,13 +8,9 @@
 <div class="box box-success">
     {!! Form::open(['url' => 'expenses/bills', 'files' => true, 'role' => 'form', 'class' => 'form-loading-button']) !!}
     <div class="box-body">
-        
-        <div class="col-md-12" style="padding:0">
-        {{ Form::textGroup('global_search', trans('bills.global_search'), 'search', []),'globalSearch' }}
-        </div>
-
+        {{ Form::textGroup('global_search', trans('bills.global_search'), 'search', [],'','col-md-4') }}
         @stack('vendor_id_input_start')
-        <div class="form-group col-md-6 required {{ $errors->has('vendor_id') ? 'has-error' : ''}}">
+        <div class="form-group col-md-4 required {{ $errors->has('vendor_id') ? 'has-error' : ''}}">
             {!! Form::label('vendor_id', trans_choice('general.vendors', 1), ['class' => 'control-label']) !!}
             <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
@@ -27,27 +23,27 @@
         </div>
         @stack('vendor_id_input_end')
 
-        {{ Form::textGroup('phone', trans('bills.phone'), 'phone', []) }}
+        {{ Form::textGroup('phone', trans('bills.phone'), 'phone', [],'','col-md-4') }}
 
         <!-- {{ Form::textGroup('ic', trans('bills.ic'), 'file-text-o', []) }}
 
         {{ Form::textGroup('customer_id', trans('bills.customer_id'), 'file-text-o', []) }} -->
 
-        {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency')) }}
+        {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency'),[],'col-md-4') }}
 
-        {{ Form::textGroup('billed_at', trans('bills.bill_date'), 'calendar',['id' => 'billed_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'],Date::now()->toDateString()) }}
+        {{ Form::textGroup('billed_at', trans('bills.bill_date'), 'calendar',['id' => 'billed_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'],Date::now()->toDateString(),'col-md-4') }}
 
         <!-- {{ Form::textGroup('phone', trans('bills.phone'), 'phone', []) }} -->
 
-        {{ Form::textGroup('ic', trans('bills.ic'), 'file-text-o', []) }}
+        {{ Form::textGroup('ic', trans('bills.ic'), 'file-text-o', [],'','col-md-4') }}
 
-        {{ Form::textGroup('customer_id', trans('bills.customer_id'), 'file-text-o', ['readonly']) }}
-        {{ Form::textGroup('cheque_number', trans('bills.cheque_number'), 'file-text-o', []) }}
-        {{ Form::textGroup('due_at', trans('bills.due_date'), 'calendar',['id' => 'due_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'],Date::now()->toDateString()) }}
+        {{ Form::textGroup('customer_id', trans('bills.customer_id'), 'file-text-o', ['readonly'],'','col-md-4') }}
+        {{ Form::textGroup('cheque_number', trans('bills.cheque_number'), 'file-text-o', [],'','col-md-4') }}
+        {{ Form::textGroup('due_at', trans('bills.due_date'), 'calendar',['id' => 'due_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'],Date::now()->toDateString(),'col-md-4') }}
 
-        {{ Form::textGroup('bill_number', trans('bills.bill_number'), 'file-text-o',['readonly'],$billNo) }}
+        {{ Form::textGroup('bill_number', trans('bills.bill_number'), 'file-text-o',['readonly'],$billNo,'col-md-4') }}
 
-        {{ Form::textGroup('order_number', trans('bills.order_number'), 'shopping-cart',[]) }}
+        {{ Form::textGroup('order_number', trans('bills.order_number'), 'shopping-cart',[],'','col-md-4') }}
 
         <div class="form-group col-md-12">
             {!! Form::label('items', trans_choice('general.items', 2), ['class' => 'control-label']) !!}
@@ -130,7 +126,6 @@
         </div>
 
         {{ Form::textareaGroup('notes', trans_choice('general.notes', 2)) }}
-<a href="{{ asset('expenses/bills') }}/{{session('billId')}}/print" id="printBtn2" target='_blank'>PrintBtn</a>
         @stack('category_id_input_start')
         <div class="form-group col-md-6 required {{ $errors->has('category_id') ? 'has-error' : ''}}">
             {!! Form::label('category_id', trans_choice('general.categories', 1), ['class' => 'control-label']) !!}

@@ -290,8 +290,8 @@ div.required .control-label:not(span):after, td.required:after {
 .typeahead.dropdown-menu {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    grid-gap: 10px;
-    padding: 10px;
+    grid-gap: 3px;
+    padding: 3px;
     min-width: 760px !important;
     background: #6da252;
   }
@@ -299,11 +299,13 @@ div.required .control-label:not(span):after, td.required:after {
   .typeahead.dropdown-menu li {
     cursor: pointer;
     border-radius: 3px;
-    padding: 20px;
+    padding: 6px;
     border: 1px solid #e9ecef;
     background: #ffff;
   }
-  
+  .typeahead a.dropdown-item{
+    padding: 2px 6px;
+  }
   .typeahead.dropdown-menu li:hover,
   .typeahead.dropdown-menu li.active {
     background-color: #337ab7;

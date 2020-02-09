@@ -9,7 +9,7 @@
 
     <div class="box-body">
         @stack('customer_id_input_start')
-        <div class="form-group col-md-6 required {{ $errors->has('customer_id') ? 'has-error' : ''}}">
+        <div class="form-group col-md-4 required {{ $errors->has('customer_id') ? 'has-error' : ''}}">
             {!! Form::label('customer_id', trans_choice('general.customers', 1), ['class' => 'control-label']) !!}
             <div class="input-group">
                 <div class="input-group-addon"><i class="fa fa-user"></i></div>
@@ -22,15 +22,17 @@
         </div>
         @stack('customer_id_input_end')
 
-        {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency')) }}
+        {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies, setting('general.default_currency'),[],'col-md-4') }}
 
-        {{ Form::textGroup('invoiced_at', trans('invoices.invoice_date'), 'calendar',['id' => 'invoiced_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'], Date::now()->toDateString()) }}
+        {{ Form::textGroup('invoiced_at', trans('invoices.invoice_date'), 'calendar',['id' => 'invoiced_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'], Date::now()->toDateString(),'col-md-4') }}
 
-        {{ Form::textGroup('due_at', trans('invoices.due_date'), 'calendar',['id' => 'due_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off']) }}
+        {{ Form::textGroup('due_at', trans('invoices.due_date'), 'calendar',['id' => 'due_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy/mm/dd\'', 'data-mask' => '', 'autocomplete' => 'off'],'','col-md-4') }}
 
-        {{ Form::textGroup('invoice_number', trans('invoices.invoice_number'), 'file-text-o', ['required' => 'required'], $number) }}
+        {{ Form::textGroup('cheque_number', trans('bills.cheque_number'), 'file-text-o', [],'','col-md-4') }}
 
-        {{ Form::textGroup('order_number', trans('invoices.order_number'), 'shopping-cart', []) }}
+        {{ Form::textGroup('invoice_number', trans('invoices.invoice_number'), 'file-text-o', ['required' => 'required'], $number,'col-md-4') }}
+
+        {{ Form::textGroup('order_number', trans('invoices.order_number'), 'shopping-cart', [],'','col-md-4') }}
 
         <div class="form-group col-md-12">
             {!! Form::label('items', trans_choice($text_override['items'], 2), ['class' => 'control-label']) !!}
