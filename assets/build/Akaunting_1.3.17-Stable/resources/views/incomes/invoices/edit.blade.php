@@ -18,9 +18,9 @@
 
             {{ Form::textGroup('cheque_number', trans('bills.cheque_number'), 'file-text-o', [],$invoice->cheque_number,'col-md-4') }}
 
-            {{ Form::textGroup('invoice_number', trans('invoices.invoice_number'), 'file-text-o',[],'','col-md-4') }}
+            {{ Form::textGroup('invoice_number', trans('invoices.invoice_number'), 'file-text-o',['readonly'],$invoice->invoice_number,'col-md-4') }}
 
-            {{ Form::textGroup('order_number', trans('invoices.order_number'), 'shopping-cart',[],'','col-md-4') }}
+            {{ Form::textGroup('order_number', trans('invoices.order_number'), 'shopping-cart',[],$invoice->order_number,'col-md-4') }}
 
             <div class="form-group col-md-12">
                 {!! Form::label('items', trans_choice($text_override['items'], 2), ['class' => 'control-label']) !!}

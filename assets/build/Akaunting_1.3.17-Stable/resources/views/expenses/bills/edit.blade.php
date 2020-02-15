@@ -8,17 +8,23 @@
         {!! Form::model($bill, ['method' => 'PATCH', 'files' => true, 'url' => ['expenses/bills', $bill->id], 'role' => 'form', 'class' => 'form-loading-button']) !!}
 
         <div class="box-body">
-            {{ Form::selectGroup('vendor_id', trans_choice('general.vendors', 1), 'user', $vendors,'',[],'col-md-4') }}
+            {{ Form::selectGroup('vendor_id', trans_choice('general.vendors', 1), 'user', $vendors,'arumugam',[],'col-md-4') }}
 
+            {{ Form::textGroup('ic', trans('bills.ic'), 'file-text-o', [],'','col-md-4') }}
+
+            {{ Form::textGroup('phone', trans('bills.phone'), 'phone', [],'','col-md-4') }}
+
+            {{ Form::textGroup('cheque_number', trans('bills.cheque_number'), 'file-text-o', [],$bill->cheque_number,'col-md-4') }}
+            
             {{ Form::selectGroup('currency_code', trans_choice('general.currencies', 1), 'exchange', $currencies,'',[],'col-md-4') }}
 
             {{ Form::textGroup('billed_at', trans('bills.bill_date'), 'calendar', ['id' => 'billed_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask' => '', 'autocomplete' => 'off'], Date::parse($bill->billed_at)->toDateString(),'col-md-4') }}
 
             {{ Form::textGroup('due_at', trans('bills.due_date'), 'calendar', ['id' => 'due_at', 'class' => 'form-control', 'required' => 'required', 'data-inputmask' => '\'alias\': \'yyyy-mm-dd\'', 'data-mask' => '', 'autocomplete' => 'off'], Date::parse($bill->due_at)->toDateString(),'col-md-4') }}
 
-            {{ Form::textGroup('bill_number', trans('bills.bill_number'), 'file-text-o',[],'','col-md-4') }}
+            {{ Form::textGroup('bill_number', trans('bills.bill_number'), 'file-text-o',['readonly'],$bill->bill_number,'col-md-4') }}
 
-            {{ Form::textGroup('order_number', trans('bills.order_number'), 'shopping-cart',[],'','col-md-4') }}
+            {{ Form::textGroup('order_number', trans('bills.order_number'), 'shopping-cart',[],$bill->order_number,'col-md-4') }}
 
             <div class="form-group col-md-12">
                 {!! Form::label('items', trans_choice('general.items', 2), ['class' => 'control-label']) !!}
@@ -212,6 +218,9 @@
             $('#vendor_id').select2({
                 placeholder: "{{ trans('general.form.select.field', ['field' => trans_choice('general.vendors', 1)]) }}"
             });
+
+             $('#vendor_id').val('{{$bill->vendor_id}}');
+            $('#vendor_id').select2().trigger('change');
 
             $('#currency_code').select2({
                 placeholder: "{{ trans('general.form.select.field', ['field' => trans_choice('general.currencies', 1)]) }}"
@@ -447,8 +456,9 @@
                     $('#vendor_name').val(data.name);
                     $('#vendor_email').val(data.email);
                     $('#vendor_tax_number').val(data.tax_number);
-                    $('#vendor_phone').val(data.phone);
+                    $('#vendor_phone,#phone').val(data.phone);
                     $('#vendor_address').val(data.address);
+                    $('#ic').val(data.ic);
 
                     $('#currency_code').val(data.currency_code);
                     $('#currency_rate').val(data.currency_rate);

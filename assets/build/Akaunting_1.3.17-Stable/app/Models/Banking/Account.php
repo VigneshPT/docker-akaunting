@@ -92,10 +92,10 @@ class Account extends Model
         $total = $this->opening_balance;
 
         // Sum Incomes
-        $total += $this->invoice_payments()->sum('amount') + $this->revenues()->sum('amount');
+        $total += $this->invoice_payments()->where('created_at', '>=', date('Y-m-d').' 00:00:00')->sum('amount') + $this->revenues()->where('created_at', '>=', date('Y-m-d').' 00:00:00')->sum('amount');
 
         // Subtract Expenses
-        $total -= $this->bill_payments()->sum('amount') + $this->payments()->sum('amount');
+        $total -= $this->bill_payments()->where('created_at', '>=', date('Y-m-d').' 00:00:00')->sum('amount') + $this->payments()->where('created_at', '>=', date('Y-m-d').' 00:00:00')->sum('amount');
 
         return $total;
     }

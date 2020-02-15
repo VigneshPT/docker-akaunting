@@ -21,7 +21,7 @@ class Company implements Scope
         $table = $model->getTable();
 
         // Skip for specific tables
-        $skip_tables = ['companies', 'jobs', 'migrations', 'notifications', 'permissions', 'role_user', 'roles', 'sessions', 'users'];
+        $skip_tables = ['companies', 'jobs', 'migrations', 'notifications', 'permissions', 'role_user', 'roles', 'sessions', 'users','vendors','customers'];
         if (in_array($table, $skip_tables)) {
             return;
         }
