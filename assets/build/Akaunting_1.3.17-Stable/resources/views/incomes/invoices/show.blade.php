@@ -240,6 +240,12 @@
                                     <td class="text-right">{{ $invoice->order_number }}</td>
                                 </tr>
                                 @endif
+                                 @if ($invoice->cheque_number)
+                                <tr>
+                                    <th>{{ trans('invoices.cheque_number') }}:</th>
+                                    <td class="text-right">{{ $invoice->cheque_number }}</td>
+                                </tr>
+                                @endif
                                 @stack('order_number_input_end')
 
                                 @stack('invoiced_at_input_start')

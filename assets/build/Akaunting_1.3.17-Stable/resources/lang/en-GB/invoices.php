@@ -7,6 +7,7 @@ return [
     'total_price'           => 'Total Price',
     'due_date'              => 'Due Date',
     'order_number'          => 'Order Number',
+    'cheque_number'         => 'Cheque Number',
     'bill_to'               => 'Bill To',
 
     'quantity'              => 'Quantity',

@@ -53,8 +53,9 @@ class Invoices extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::with(['customer', 'status', 'items', 'payments', 'histories'])->collect(['invoice_number'=> 'desc']);
 
+        $invoices = Invoice::with(['customer', 'status', 'items', 'payments', 'histories'])->collect(['invoice_number'=> 'desc']);
+        
         $customers = collect(Customer::enabled()->orderBy('name')->pluck('name', 'id'));
 
         $categories = collect(Category::enabled()->type('income')->orderBy('name')->pluck('name', 'id'));
@@ -76,6 +77,7 @@ class Invoices extends Controller
      */
     public function show(Invoice $invoice)
     {
+        
         $accounts = Account::enabled()->orderBy('name')->pluck('name', 'id');
 
         $currencies = Currency::enabled()->orderBy('name')->pluck('name', 'code')->toArray();
@@ -687,6 +689,7 @@ class Invoices extends Controller
 
     protected function prepareInvoice(Invoice $invoice)
     {
+
         $paid = 0;
 
         foreach ($invoice->payments as $item) {
