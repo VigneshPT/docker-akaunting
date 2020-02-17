@@ -95,6 +95,7 @@ class Transactions extends Controller
 
     protected function getTransactions($request)
     {
+        $auth_user = auth()->user();
         // Sort items
         if (isset($request['sort'])) {
             if ($request['order'] == 'asc') {
@@ -102,12 +103,19 @@ class Transactions extends Controller
             } else {
                 $f = 'sortByDesc';
             }
-
-            $transactions = collect($this->transactions)->$f($request['sort']);
+            if ($auth_user->can('read-transaction-today-date-range') && !$auth_user->can('read-transaction-default-date-range')){
+                $transactions = collect($this->transactions)->where('paid_at', '>=', date('Y-m-d').' 00:00:00')->$f($request['sort']);
+            }else{
+                $transactions = collect($this->transactions)->$f($request['sort']);
+            }
         } else {
-            $transactions = collect($this->transactions)->sortByDesc('paid_at');
+            if ($auth_user->can('read-transaction-today-date-range') && !$auth_user->can('read-transaction-default-date-range')){
+                $transactions = collect($this->transactions)->where('paid_at', '>=', date('Y-m-d').' 00:00:00')->sortByDesc('paid_at');
+            }else{
+                $transactions = collect($this->transactions)->sortByDesc('paid_at');    
+            }
+            
         }
-
         return $transactions;
     }
 }
