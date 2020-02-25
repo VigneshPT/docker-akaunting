@@ -99,4 +99,18 @@ class Account extends Model
 
         return $total;
     }
+    //get TotalBalance
+    public function getTotalBalanceAttribute()
+    {
+        // Opening Balance
+        $total = $this->opening_balance;
+
+        // Sum Incomes
+        $total += $this->invoice_payments()->sum('amount') + $this->revenues()->sum('amount');
+
+        // Subtract Expenses
+        $total -= $this->bill_payments()->sum('amount') + $this->payments->sum('amount');
+
+        return $total;
+    }
 }
