@@ -47,7 +47,7 @@
                         <td><a href="{{ route('accounts.edit', $item->id) }}">{{ $item->name }}</a></td>
                         @endif
                         <td class="hidden-xs">{{ $item->number }}</td>
-                        <td class="text-right amount-space">@money($item->balance, $item->currency_code, true)</td>
+                        <td class="text-right amount-space">@money($item->totalBalance, $item->currency_code, true)</td>
                         <td class="hidden-xs">
                             @if ($item->enabled)
                                 <span class="label label-success">{{ trans('general.enabled') }}</span>
