@@ -72,7 +72,7 @@
                     @stack('billed_at_input_start')
                     <tr>
                         <th>{{ trans('bills.bill_date') }}:</th>
-                        <td class="text-right">{{ Date::parse($bill->billed_at)->format($date_format) }}</td>
+                        <td class="text-right">{{ Date::parse($bill->billed_at)->format('H:iA '.$date_format) }}</td>
                     </tr>
                     @stack('billed_at_input_end')
                     @stack('due_at_input_start')
