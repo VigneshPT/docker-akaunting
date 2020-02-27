@@ -69,6 +69,12 @@
                     </tr>
                     @endif
                     @stack('order_number_input_end')
+                    @stack('ic_input_start')
+                    <tr>
+                        <th>{{ trans('bills.ic') }}:</th>
+                        <td class="text-right">{{ $bill->ic }}</td>
+                    </tr>
+                    @stack('ic_input_end')
                     @stack('billed_at_input_start')
                     <tr>
                         <th>{{ trans('bills.bill_date') }}:</th>
