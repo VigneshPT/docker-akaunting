@@ -69,6 +69,14 @@
                     </tr>
                     @endif
                     @stack('order_number_input_end')
+                    @stack('cheque_number_input_start')
+                    @if ($invoice->cheque_number)
+                    <tr>
+                        <th></th>
+                        <td class="text-right">{{ $invoice->cheque_number }}</td>
+                    </tr>
+                    @endif
+                    @stack('cheque_number_input_end')
                     @stack('invoiced_at_input_start')
                     <tr>
                         <th>{{ trans('invoices.invoice_date') }}:</th>

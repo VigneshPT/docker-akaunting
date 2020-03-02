@@ -69,6 +69,14 @@
                     </tr>
                     @endif
                     @stack('order_number_input_end')
+                    @stack('cheque_number_input_start')
+                    @if ($bill->cheque_number)
+                    <tr>
+                        <th></th>
+                        <td class="text-right">{{ $bill->cheque_number }}</td>
+                    </tr>
+                    @endif
+                    @stack('cheque_number_input_end')
                     @stack('ic_input_start')
                     <tr>
                         <th>{{ trans('bills.ic') }}:</th>
