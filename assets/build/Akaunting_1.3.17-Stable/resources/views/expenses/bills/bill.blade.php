@@ -130,9 +130,6 @@
             @stack('name_td_start')
             <td class="item">
                 {{ $item->name }}
-                @if ($item->sku)
-                    <br><small>{{ trans('items.sku') }}: {{ $item->sku }}</small>
-                @endif
             </td>
             @stack('name_td_end')
             @stack('quantity_td_start')
