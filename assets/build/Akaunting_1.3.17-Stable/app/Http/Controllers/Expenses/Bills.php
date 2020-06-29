@@ -325,7 +325,6 @@ class Bills extends Controller
      */
     public function export()
     {
-        ini_set('max_execution_time', 360000);
         \Excel::create('bills', function ($excel) {
             $bills = Bill::with(['items', 'item_taxes', 'histories', 'payments', 'totals'])->filter(request()->input())->get();
 
@@ -341,6 +340,7 @@ class Bills extends Controller
                     $hidden_fields = ['id', 'company_id', 'created_at', 'updated_at', 'deleted_at', 'title'];
 
                     $i = 1;
+
                     foreach ($bills as $bill) {
                         $model = $bill->$table->makeHidden($hidden_fields);
 
