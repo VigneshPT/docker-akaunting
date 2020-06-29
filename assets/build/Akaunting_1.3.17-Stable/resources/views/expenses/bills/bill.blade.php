@@ -69,10 +69,24 @@
                     </tr>
                     @endif
                     @stack('order_number_input_end')
+                    @stack('cheque_number_input_start')
+                    @if ($bill->cheque_number)
+                    <tr>
+                        <th></th>
+                        <td class="text-right">{{ $bill->cheque_number }}</td>
+                    </tr>
+                    @endif
+                    @stack('cheque_number_input_end')
+                    @stack('ic_input_start')
+                    <tr>
+                        <th>{{ trans('bills.ic') }}:</th>
+                        <td class="text-right">{{ $bill->ic }}</td>
+                    </tr>
+                    @stack('ic_input_end')
                     @stack('billed_at_input_start')
                     <tr>
                         <th>{{ trans('bills.bill_date') }}:</th>
-                        <td class="text-right">{{ Date::parse($bill->billed_at)->format($date_format) }}</td>
+                        <td class="text-right">{{ Date::parse($bill->billed_at)->format('H:iA '.$date_format) }}</td>
                     </tr>
                     @stack('billed_at_input_end')
                     @stack('due_at_input_start')
@@ -116,9 +130,6 @@
             @stack('name_td_start')
             <td class="item">
                 {{ $item->name }}
-                @if ($item->sku)
-                    <br><small>{{ trans('items.sku') }}: {{ $item->sku }}</small>
-                @endif
             </td>
             @stack('name_td_end')
             @stack('quantity_td_start')
