@@ -49,6 +49,7 @@ class Bills extends Controller
      */
     public function index()
     {
+        echo "asdf";
         $bills = Bill::with(['vendor', 'status', 'items', 'payments', 'histories'])->collect(['billed_at'=> 'desc']);
 
         $vendors = collect(Vendor::enabled()->orderBy('name')->pluck('name', 'id'));
@@ -325,6 +326,7 @@ class Bills extends Controller
      */
     public function export()
     {
+        ini_set('max_execution_time', 300);
         \Excel::create('bills', function ($excel) {
             $bills = Bill::with(['items', 'item_taxes', 'histories', 'payments', 'totals'])->filter(request()->input())->get();
 
@@ -340,7 +342,6 @@ class Bills extends Controller
                     $hidden_fields = ['id', 'company_id', 'created_at', 'updated_at', 'deleted_at', 'title'];
 
                     $i = 1;
-
                     foreach ($bills as $bill) {
                         $model = $bill->$table->makeHidden($hidden_fields);
 
