@@ -19,7 +19,7 @@ class Controller extends BaseController
     public function __construct()
     {
         // No need to check for permission in console
-        ini_set('max_execution_time', 600);
+        ini_set('max_execution_time', 1000);
         if (app()->runningInConsole()) {
             return;
         }
