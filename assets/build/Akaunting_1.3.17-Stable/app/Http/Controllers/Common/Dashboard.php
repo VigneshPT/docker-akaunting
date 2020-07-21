@@ -50,7 +50,7 @@ class Dashboard extends Controller
         $latest_incomes = $this->getLatestIncomes();
 
         $latest_expenses = $this->getLatestExpenses();
-
+        
         return view('common.dashboard.index', compact(
             'total_incomes',
             'total_expenses',

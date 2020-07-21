@@ -200,7 +200,7 @@ class Company extends Eloquent
 
         $input = $request->input();
         $limit = $request->get('limit', setting('general.list_limit', '25'));
-
+        
         return Auth::user()->companies()->filter($input)->sortable($sort)->paginate($limit);
     }
 

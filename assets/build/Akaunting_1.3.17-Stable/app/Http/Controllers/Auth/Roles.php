@@ -83,6 +83,7 @@ class Roles extends Controller
 
         $rolePermissions = $role->permissions->pluck('id', 'id')->toArray();
 
+
         foreach ($allPermissions as $permission) {
             // permission code explode - and get permission type
             $n = explode('-', $permission->name);
@@ -93,7 +94,7 @@ class Roles extends Controller
 
             $permissions[$n[0]][] = $permission;
         }
-
+        
         return view('auth.roles.edit', compact('role', 'names', 'permissions', 'rolePermissions'));
     }
 

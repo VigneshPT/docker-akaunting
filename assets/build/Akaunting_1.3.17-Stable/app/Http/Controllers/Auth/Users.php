@@ -40,6 +40,7 @@ class Users extends Controller
         $roles = Role::all()->reject(function ($r) {
             return $r->hasPermission('read-customer-panel');
         });
+        $roles = Role::all();
 
         $companies = Auth::user()->companies()->get()->sortBy('name');
 
@@ -102,7 +103,7 @@ class Users extends Controller
                 return $r->hasPermission('read-customer-panel');
             });
         }
-
+	$roles = Role::all();
         $companies = Auth::user()->companies()->get()->sortBy('name');
 
         foreach ($companies as $company) {
