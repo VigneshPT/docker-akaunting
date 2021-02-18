@@ -33,7 +33,9 @@ class Logo
             $path = Storage::path($media->getDiskPath());
 
             if (!is_file($path)) {
+                $view->with(['logo' => $logo]);
                 return $logo;
+
             }
         } else {
             $path = asset('public/img/company.png');
@@ -42,6 +44,7 @@ class Logo
         $image = Image::make($path)->encode()->getEncoded();
 
         if (empty($image)) {
+            $view->with(['logo' => $logo]);
             return $logo;
         }
 
