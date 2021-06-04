@@ -26,7 +26,7 @@ services:
     - DB_PASS=password
     - DB_NAME=akaunting_db
 
-    - AKAUNTING_URL=http://localhost:10080
+    - AKAUNTING_URL=http://localhost
 
     - AKAUNTING_COMPANY_NAME=
     - AKAUNTING_COMPANY_EMAIL=
@@ -50,4 +50,4 @@ services:
     depends_on:
     - akaunting
     ports:
-    - "10080:80"
+    - "80:80"
